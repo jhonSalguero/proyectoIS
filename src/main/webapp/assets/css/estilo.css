@@ -68,6 +68,7 @@ body{
     background-color: #cfecfc;
     border-radius: 20px;
     border: solid 2px #000;
+    overflow-x: scroll;
     /*float: left;
     display: inline-flex;*/
 }
