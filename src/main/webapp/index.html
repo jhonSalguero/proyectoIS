@@ -5,20 +5,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
-        <script type="text/javascript" src="assets/js/js.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     </head>
     <body>
+      
         <div class="titulo">Analizador de Codigos Fuente</div>
         <div class="panelIzq">
             <div class="panelBotonesArchivo">
                 <div class="botonArchivo" id="cargar">
-                    <input type="file" id="files" webkitdirectory mozdirectory msdirectory odirectory directory multiple="multiple" />Cargar Proyecto
+                    <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />Cargar proyecto
+                   
                 </div>
             </div>
-            <div class="panelArchivos" id="panelArchivos"></div> 
+            <div class="panelArchivos" id="panelArchivos">
+                <ul id="listing"></ul>
+            </div> 
         </div>
         <div class="panelDer">
             <div class="nav">
@@ -30,5 +33,21 @@
             <div class="texto" id="textoCentral">
             </div>
         </div>
+        
+        <script>
+          document.getElementById("filepicker").addEventListener("change", function(event) {
+          let output = document.getElementById("listing");
+          let files = event.target.files;
+
+          for (let i=0; i<files.length; i++) {
+            let item = document.createElement("li");
+            item.innerHTML = files[i].webkitRelativePath;
+            output.appendChild(item);
+          };
+        }, false);
+        </script>
+        
+        
     </body>
+    
 </html>
