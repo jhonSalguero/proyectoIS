@@ -7,47 +7,37 @@
         <link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">  
     </head>
     <body>
-      
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <div class="titulo">Analizador de Codigos Fuente</div>
         <div class="panelIzq">
             <div class="panelBotonesArchivo">
                 <div class="botonArchivo" id="cargar">
-                    <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />Cargar proyecto
-                   
+                    <input type="file" id="botonArchivo"  webkitdirectory multiple />Cargar proyecto
                 </div>
             </div>
             <div class="panelArchivos" id="panelArchivos">
-                <ul id="listing"></ul>
             </div> 
         </div>
         <div class="panelDer">
             <div class="nav">
-                <div class="menu" id="analisisGeneral">Analisis General</div>
-                <div class="menu" id="analisisEspecifico">Analisis Especifico</div>
-                <div class="menu" id="Graficas">Graficos</div>
-                <div class="menu" id="Diagrama de clases">Diagrama de Clases</div>
+                <div class="menu" id="analisisGeneral" onclick="Text()">Analisis General</div>
+                <div class="menu" id="Barras" onclick="OBarras()">Grafica de Barras</div>
+                <div class="menu" id="Burbujas" onclick="OBurbujas()">Grafica de Burbujas</div>
             </div>
-            <div class="texto" id="textoCentral">
+            <div class="texto">
+                <div class="info" id="textoCentral">
+                </div>
+                <div class="DivG" id="GBarras">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="DivG" id="GBurbujas">
+                    <canvas id="popChart"></canvas>
+                </div>
             </div>
         </div>
-        
-        <script>
-          document.getElementById("filepicker").addEventListener("change", function(event) {
-          let output = document.getElementById("listing");
-          let files = event.target.files;
-
-          for (let i=0; i<files.length; i++) {
-            let item = document.createElement("li");
-            item.innerHTML = files[i].webkitRelativePath;
-            output.appendChild(item);
-          };
-        }, false);
-        </script>
-        
-        
+        <script type="text/javascript" src="assets/js/js.js"></script> 
     </body>
-    
 </html>
