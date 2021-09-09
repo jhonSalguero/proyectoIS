@@ -193,6 +193,7 @@ body{
 #GBurbujas{
     display: none;
 }
+
 .info{
     height: 99%;
     width: 99%;
@@ -202,4 +203,29 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 9px;
+}
+
+#header h1 { 
+    display:inline;
+    margin-right: 10%;
+}
+#header{
+    margin-left: 10%;
+    text-align: center;
+    display: none;
+}
+#clases{
+    color: rgba(255, 99, 132, 0.2);
+}
+#abstractas{
+    color: rgba(54, 162, 235, 0.2);
+}
+#interfaces{
+    color: rgba(255, 206, 86, 0.2);
+}
+#atributos{
+    color: rgba(75, 192, 192, 0.2);
+}
+#funciones{
+    color: rgba(153, 102, 255, 0.2);
 }

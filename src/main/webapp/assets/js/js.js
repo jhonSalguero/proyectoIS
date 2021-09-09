@@ -233,6 +233,8 @@ function mostrarTexto(arreglo, nombre) {
     }
 
     Grafica(nomb, ContIf, ContFor, ContDo, ContForeach, ContWhile);
+    Grafica2(nomb, ContClases, ContClasesabs, ContAtributos, ContFunciones, ContInterfaces);
+    labels();
 
     let itemTemp = document.createElement("DIV");
     let textoTemp = document.createTextNode("****** Detalles del archivo ******");
@@ -401,6 +403,71 @@ function Grafica(nomb, ContIf, ContFor, ContDo, ContForeach, ContWhile) {
     });
 }
 
+function Grafica2(nomb, ContClases, ContClasesabs, ContAtributos, ContFunciones, ContInterfaces) {
+//Grafica de burbujas
+//setup block
+
+    const data = {
+        labels: ['Clases', 'Clases abstractas', 'Interfaces', 'Atributos', 'Funciones'],
+        datasets: [{
+                label: nomb,
+                data: [
+                    {x: 10, y: ContClases, r: 45},
+                    {x: 20, y: ContClasesabs, r: 30},
+                    {x: 30, y: ContInterfaces, r: 35},
+                    {x: 40, y: ContAtributos, r: 50},
+                    {x: 50, y: ContFunciones, r: 40}
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                clip: false
+            }]
+    };
+
+//config block
+    const config = {
+        type: 'bubble',
+        data,
+        options: {
+            layout: {
+                paddin: {
+                    right: 20
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+//init render block
+    if (window.grafica1) {
+        window.grafica1.clear();
+        window.grafica1.destroy();
+    }
+    window.grafica1 = new Chart(
+            document.getElementById('popChart'),
+            config
+            );
+}
+
 //botones graficas
 function OBarras() {
     document.getElementById('GBarras').style.display = 'block';
@@ -412,6 +479,10 @@ function OBurbujas() {
     document.getElementById('GBurbujas').style.display = 'block';
     document.getElementById('textoCentral').style.display = 'none';
 }
+function labels(){
+    document.getElementById('header').style.display = 'block';
+}
+
 function Text() {
     document.getElementById('GBarras').style.display = 'none';
     document.getElementById('GBurbujas').style.display = 'none';
@@ -425,61 +496,3 @@ function Text() {
 }
 
 
-//Grafica de burbujas
-//setup block
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [
-                {x:1, y: 15, r: 2},
-                {x:2, y: 5, r: 5},
-                {x:3, y: 10, r: 7},
-                {x:4, y: 7, r: 9},
-                {x:5, y: 3, r: 11},
-                {x:6, y: 9, r: 15}
-            ],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1,
-            clip: false
-        }]
-};
-
-//config block
-const config = {
-        type: 'bubble',
-    data,
-    options: {
-        layout:{
-            paddin: {
-                right: 20
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-};
-
-//init render block
-const myChart = new Chart(
-    document.getElementById('popChart'),
-    config
-);
