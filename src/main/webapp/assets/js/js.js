@@ -59,7 +59,6 @@ document.getElementById("botonArchivo").addEventListener("change", function (eve
         }
     }
     arbol[0] = arbol[0].replaceAll(' ', '_');
-    //output.appendChild(item);
     let contDocu = 0;
     var arbolTemp = document.createElement("DIV");
 
@@ -74,7 +73,6 @@ document.getElementById("botonArchivo").addEventListener("change", function (eve
                 break;
             case 2:
                 item.classList.add("nivel2");
-                //console.log(arbol[i].split('.'));
                 if (/\.+[\w]{3,5}/.test(arbol[i])) {
                     item.setAttribute("onclick", "mostrarTexto( window.documentos[" + contDocu + "], '" + arbol[i] + "')");
                     contDocu = contDocu + 1;
@@ -173,8 +171,7 @@ function alternar(texto) {
 function mostrarTexto(arreglo, nombre) {
     let panel = document.getElementById("textoCentral");
     let hijo = document.getElementsByClassName("hijo");
-    let ContClases = 0, ContClasesabs = 0, ContInterfaces = 0, ContIf = 0, ContFor = 0, ContWhile = 0, ContDo = 0, ContForeach = 0, ContAtributos = 0, ContFunciones = 0;
-
+    let ContClases = 0, ContClasesabs = 0, ContInterfaces = 0, ContIf = 0, ContFor = 0, ContWhile = 0, ContDo = 0, ContForeach = 0, ContAtributos = 0, ContFunciones = 0, Complejidad = 0;
 
     if (hijo.length == 1) {
         panel.removeChild(hijo[0]);
@@ -190,11 +187,10 @@ function mostrarTexto(arreglo, nombre) {
         if (lineaMayor < arreglo[i].length) {
             lineaMayor = arreglo[i].length;
         }
-        //"Linea " + (i + 1) + " tiene " + arreglo[i].length + " Caracteres \nContenido:\n" +
+
         let item = document.createElement("DIV");
         var texto = document.createTextNode(arreglo[i] + "_______________" + arreglo[i].length + "  Caracteres");
         item.appendChild(texto);
-        //console.log(arreglo);
         codigo.appendChild(item);
 
         //Expresion regular para validar la cantidad de clases
@@ -209,7 +205,7 @@ function mostrarTexto(arreglo, nombre) {
         if (/interface/g.test(arreglo[i])) {
             ContInterfaces++;
         }
-        if (/if\s?\(\w*\s?(==|&&|>|<|<=|<|!=|>=|\|{2}|)\s?\w*\)/g.test(arreglo[i])) {
+        if (/if\s?\(\s*\w*(.)\w*\s?(==|&&|>|<|<=|<|!=|>=|\|{2}|)\s?\"?\w*\"?\)/g.test(arreglo[i])) {
             ContIf++;
         }
         if (/for\s?\(\w*\s?\w\s?\=\s?\d\;\s?\w*\s?(<|>|<=|>=)\s?\d*\;\s\w*(\+{2}|\-{2})\)/g.test(arreglo[i])) {
@@ -230,6 +226,50 @@ function mostrarTexto(arreglo, nombre) {
         if (/(public|private)?\s?(static|final)?\s?(void|byte|short|int|long|float|double|boolean|char|String)\s?\w*\(/g.test(arreglo[i])) {
             ContFunciones++;
         }
+    }
+    Complejidad = ComplejidadCiclomatica(arreglo);
+
+    var cadena = arreglo.join(' ').toLowerCase();
+    var re = /(\;|\{|\}|\/|\(|\)|\+|\=|\-|\"|\&|\d|\||\<|\>|\[|\]|\:|\!|\¡|\'|\?|\\n|\,)/g;
+    var resultado = cadena.replace(re, ' ');
+    let arrayPalabras;
+
+    function dividirCadena(cadenaADividir, separador) {
+        //Separa por espacios 
+        var arrayDeCadenas = cadenaADividir.split(separador);
+
+        //Elimina palabras repetidas
+        arrayPalabras = arrayDeCadenas.filter((item, index) => {
+            return arrayDeCadenas.indexOf(item) === index;
+        });
+
+    }
+
+    dividirCadena(resultado, " ");
+    for (let k = 0; k < arrayPalabras.length; k++) {
+        let cant = 0;
+        //Elimina \n y espacios vacios
+        if (arrayPalabras[k] === '' || arrayPalabras[k] === '\n') {
+            arrayPalabras.splice(k, 1);
+        }
+        var idx = (cadena.indexOf(arrayPalabras[k]));
+        while (idx != -1) {
+            cant++;
+            idx = cadena.indexOf(arrayPalabras[k], idx + 1);
+        }
+        var tableRef = document.getElementById("tabla");
+        //Creo una fila con dos columnas
+        var newRow = tableRef.insertRow();
+        var Cell = newRow.insertCell(0);
+        var Cell2 = newRow.insertCell(1);
+        //Variables con la palabra y cantidad
+        var palabra = arrayPalabras[k];
+        var cantidad = cant;
+        //Asigno los valores a las celdas de la tabla
+        var newText = document.createTextNode(palabra);
+        Cell.appendChild(newText);
+        var newText2 = document.createTextNode(cantidad);
+        Cell2.appendChild(newText2);
     }
 
     Grafica(nomb, ContIf, ContFor, ContDo, ContForeach, ContWhile);
@@ -307,6 +347,11 @@ function mostrarTexto(arreglo, nombre) {
     funciones.appendChild(txtFunciones);
     info.appendChild(funciones);
 
+    let complejidad = document.createElement("DIV");
+    let txtComplejidad = document.createTextNode("Complejidad Ciclomatica: " + Complejidad);
+    complejidad.appendChild(txtComplejidad);
+    info.appendChild(complejidad);
+
     let espacio = document.createElement("DIV");
     let txtEspacio = document.createTextNode("---------------------------------------------------------------");
     espacio.appendChild(txtEspacio);
@@ -324,8 +369,6 @@ function mostrarTexto(arreglo, nombre) {
     filaTamaño.classList.add("elementoTabla");
     filaNombre.appendChild(nombre);
     filaTamaño.appendChild(tamaño);
-    filaNombre.classList.add("elementoTabla");
-    filaTamaño.classList.add("elementoTabla");
     columna.appendChild(filaNombre);
     columna.appendChild(filaTamaño);
     columna.classList.add("columna");
@@ -351,7 +394,6 @@ function mostrarTexto(arreglo, nombre) {
     info.appendChild(tabla);
 
 
-    //
     info.classList.add("hijoInfo");
     codigo.classList.add("hijoCodigo");
     divTemp.appendChild(codigo);
@@ -405,7 +447,6 @@ function Grafica(nomb, ContIf, ContFor, ContDo, ContForeach, ContWhile) {
 
 function Grafica2(nomb, ContClases, ContClasesabs, ContAtributos, ContFunciones, ContInterfaces) {
 //Grafica de burbujas
-//setup block
 
     const data = {
         labels: ['Clases', 'Clases abstractas', 'Interfaces', 'Atributos', 'Funciones'],
@@ -473,19 +514,28 @@ function OBarras() {
     document.getElementById('GBarras').style.display = 'block';
     document.getElementById('GBurbujas').style.display = 'none';
     document.getElementById('textoCentral').style.display = 'none';
+    document.getElementById('OcurrenciaP').style.display = 'none';
 }
 function OBurbujas() {
     document.getElementById('GBarras').style.display = 'none';
     document.getElementById('GBurbujas').style.display = 'block';
     document.getElementById('textoCentral').style.display = 'none';
+    document.getElementById('OcurrenciaP').style.display = 'none';
 }
-function labels(){
+function Ocurrencia() {
+    document.getElementById('GBarras').style.display = 'none';
+    document.getElementById('GBurbujas').style.display = 'none';
+    document.getElementById('textoCentral').style.display = 'none';
+    document.getElementById('OcurrenciaP').style.display = 'block';
+}
+function labels() {
     document.getElementById('header').style.display = 'block';
 }
 
 function Text() {
     document.getElementById('GBarras').style.display = 'none';
     document.getElementById('GBurbujas').style.display = 'none';
+    document.getElementById('OcurrenciaP').style.display = 'none';
 
     var T = document.getElementById("textoCentral");
     if (T.style.display === "none") {
@@ -493,6 +543,65 @@ function Text() {
     } else {
         T.style.display = "none";
     }
+}
+
+
+function ComplejidadCiclomatica(arreglo) {
+    var is_if = false;
+    var count_if = 0;
+    var nodos = 2;
+    var aristas = 1;
+    var esperando_else = false
+
+    for (let i = 0; i < arreglo.length; i++) {
+        var line = arreglo[i].replace(/\n/gm, '')
+        var line = arreglo[i]
+        if (line != "") {
+            var aux = line.replace(/\s/g, '')
+            console.log(aux + '--------' + is_if);
+            if (esperando_else == true) {
+                esperando_else = false
+                aristas += 1;
+                if (aux.startsWith('else') || aux.startsWith('{else')) {
+                    if (count_if == 0) {
+                        is_if = false
+                    }
+                }
+            } else if (aux.startsWith('if') && aux.endsWith(';')) {
+                is_if = false;
+                nodos += 1;
+                aristas += 2;
+            } else if (aux.startsWith('if')) {
+                is_if = true;
+                nodos += 1;
+                count_if += 1;
+                aristas += 2;
+                console.log("entro if");
+                esperando_else = true;
+            } else if ((aux.startsWith('elseif') || aux.startsWith('{elseif')) && is_if == true) {
+                nodos += 1;
+                aristas += 2;
+                console.log("entro elseif");
+            } else if ((aux.startsWith('else') || aux.startsWith('{else')) && is_if == true) {
+                nodos += 2;
+                aristas += 2;
+                count_if -= 1;
+                console.log("entro else");
+            } else if ((aux.startsWith('}') || aux.endsWith('}')) && is_if == true) {
+                aristas += 2;
+                count_if -= 1;
+                nodos += 1;
+                console.log("entro }");
+                if (count_if == 0) {
+                    is_if = false
+                }
+            }
+        }
+    }
+
+    nodos = nodos + 1
+
+    return aristas - nodos + 2
 }
 
 

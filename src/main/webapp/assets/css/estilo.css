@@ -100,6 +100,7 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 9px;
+    overflow-x: scroll;
 }
 .nivel1{
     margin-left: 10px;
@@ -187,10 +188,22 @@ body{
     font-size: 9px;
     
 }
+.Ocu{
+    width: 90%;
+    margin: 5%;
+    background-color: #474554;
+    color: white;	
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+}
 #GBarras{
     display: none;
 }
 #GBurbujas{
+    display: none;
+}
+#OcurrenciaP{
     display: none;
 }
 
@@ -207,7 +220,7 @@ body{
 
 #header h1 { 
     display:inline;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 #header{
     margin-left: 10%;
@@ -228,4 +241,13 @@ body{
 }
 #funciones{
     color: rgba(153, 102, 255, 0.2);
+}
+#tabla,td,th{
+    text-align: center;
+    width: 500px;
+    height: 20px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 10px;
+    font-size: 16px;
 }

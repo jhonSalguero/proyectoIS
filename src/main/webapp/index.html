@@ -26,6 +26,7 @@
                 <div class="menu" id="analisisGeneral" onclick="Text()">Analisis General</div>
                 <div class="menu" id="Barras" onclick="OBarras()">Grafica de Barras</div>
                 <div class="menu" id="Burbujas" onclick="OBurbujas()">Grafica de Burbujas</div>
+                <div class="menu" id="Ocurrencia" onclick="Ocurrencia()">Ocurrencia de palabras</div>
             </div>
             <div class="texto">
                 <div class="info" id="textoCentral">
@@ -42,6 +43,17 @@
                         <h1 id="atributos">'Atributos'</h1> 
                         <h1 id="funciones">'Funciones'</h1>
                     </div>
+                </div>
+                <div class="Ocu" id="OcurrenciaP">
+                    <table id="tabla">
+                        <tr>
+                            <td colspan="2">OCURRENCIA DE PALABRAS</td>
+                        </tr>
+                        <tr>
+                            <th>Palabra</th><th>Cantidad</th>
+                        </tr>
+                        <tr id="div1"></tr>
+                    </table> 
                 </div>
             </div>
         </div>
