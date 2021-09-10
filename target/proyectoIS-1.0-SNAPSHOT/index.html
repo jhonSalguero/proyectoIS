@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Analizador de codigos fuente</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">  
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        <div class="titulo">Analizador de Codigos Fuente</div>
+        <div class="panelIzq">
+            <div class="panelBotonesArchivo">
+                <div class="botonArchivo" id="cargar">
+                    <input type="file" id="botonArchivo"  webkitdirectory multiple />Cargar proyecto
+                </div>
+            </div>
+            <div class="panelArchivos" id="panelArchivos">
+            </div> 
+        </div>
+        <div class="panelDer">
+            <div class="nav">
+                <div class="menu" id="analisisGeneral" onclick="Text()">Analisis General</div>
+                <div class="menu" id="Barras" onclick="OBarras()">Grafica de Barras</div>
+                <div class="menu" id="Burbujas" onclick="OBurbujas()">Grafica de Burbujas</div>
+                <div class="menu" id="Ocurrencia" onclick="Ocurrencia()">Ocurrencia de palabras</div>
+            </div>
+            <div class="texto">
+                <div class="info" id="textoCentral">
+                </div>
+                <div class="DivG" id="GBarras">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="DivG" id="GBurbujas">
+                    <canvas id="popChart"></canvas>
+                    <div id="header">
+                        <h1 id="clases">'Clases'</h1> 
+                        <h1 id="abstractas">'Clases abstractas'</h1> 
+                        <h1 id="interfaces">'Interfaces'</h1> 
+                        <h1 id="atributos">'Atributos'</h1> 
+                        <h1 id="funciones">'Funciones'</h1>
+                    </div>
+                </div>
+                <div class="Ocu" id="OcurrenciaP">
+                    <table id="tabla">
+                        <tr>
+                            <td colspan="2">OCURRENCIA DE PALABRAS</td>
+                        </tr>
+                        <tr>
+                            <th>Palabra</th><th>Cantidad</th>
+                        </tr>
+                        <tr id="div1"></tr>
+                    </table> 
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="assets/js/js.js"></script> 
+    </body>
+</html>

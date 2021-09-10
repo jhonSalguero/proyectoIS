@@ -1,0 +1,253 @@
+*{
+
+    font-family: 'Noto Sans JP', sans-serif;
+}
+#botonArchivo{
+    position:absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;  
+}
+body{
+    background-color :#FFC000;
+}
+.titulo{
+    background-color: #571A01;
+    color: #F7DF85;
+    border: solid 1px #F7DF85;
+    border-radius: 10px;
+    display: flex;
+    width: 98vw;
+
+    justify-content: center;
+}
+.nav{
+    height: 5vh;
+    width: 64vw;
+    margin-left: 9px;
+    display: flex;
+    justify-content: left;
+}
+.menu{
+    background-color: #F7DF85;
+    color: #571A01;
+    border: solid 1px #571A01;
+    height: 5vh;
+    width: 15vw;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px 10px 0  0;
+    display: flex;
+    justify-content: center;
+    font-size: 70%;
+    align-items: center;
+
+}
+.panelIzq{
+    margin: 2px;
+    height: 90vh;
+    width: 25vw;
+    float: left;
+    display: block;
+}
+.panelDer{
+    margin: 2px;
+    height: 90vh;
+    width: 70vw;
+    display: block;
+    float: left;
+}
+.panelArchivos{
+    height: 84vh;
+    width: 98%;
+    background-color: #cfecfc;
+    border-radius: 20px;
+    border: solid 2px #000;
+    overflow-x: scroll;
+    font-size: 80%;
+    /*float: left;
+    display: inline-flex;*/
+}
+.panelBotonesArchivo{
+    width: 25vw;
+    margin: 0vh 0 0 1vw;
+}
+.botonArchivo{
+    height: 5vh;
+    width: 90%;
+    margin: 2px ;
+    background-color: #94d1ba;
+    border-radius: 9px;
+    border: solid 2px #000;
+    display: flex;	
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+
+.texto{
+    height: 84vh;
+    width: 100%;
+    margin: 2px auto;
+    background-color: #474554;
+    border-radius: 9px;
+    border: solid 2px #000;
+    color: white;	
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    overflow-x: scroll;
+}
+.nivel1{
+    margin-left: 10px;
+    
+}
+.nivel2{
+    margin-left: 20px;
+}
+.nivel3{
+    margin-left: 30px;
+}
+.nivel4{
+    margin-left: 40px;
+}
+.nivel5{
+    margin-left: 50px;
+}
+.nivel6{
+    margin-left: 60px;
+}
+.nivel7{
+    margin-left: 70px;
+}
+.nivel8{
+    margin-left: 80px;
+}
+.nivel9{
+    margin-left: 90px;
+}
+.oculto{
+    display: none;
+}
+.elementoLista{
+    height: 30px;
+    border-radius: 10px; 
+}
+.hijoCodigo{
+    width: 60%;
+    height: 100%;
+    background-color: black;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+.hijoInfo{
+    width: 40%;
+    height: 100%;
+    background-color: #94d1ba;
+    color:black;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    font-size: 16px;
+    justify-content: center;
+}
+.hijo{
+    display:flex;
+    height: 100%;
+}
+.tabla{
+    margin-left: 15px;
+    width: 100%;
+}
+.columna{
+    width: 90%;
+    background-color: white;
+    display:  flex;
+}
+.elementoTabla{
+    width: 50%;
+    border: solid 1px black;
+    font-size: 60%;
+    display: flex;
+    justify-content: center;
+}
+.tituloInfo{
+    font-size: 16px;
+    display: inline-block;
+}
+.DivG{
+    width: 90%;
+    margin: 5%;
+    background-color: #474554;
+    color: white;	
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    
+}
+.Ocu{
+    width: 90%;
+    margin: 5%;
+    background-color: #474554;
+    color: white;	
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+}
+#GBarras{
+    display: none;
+}
+#GBurbujas{
+    display: none;
+}
+#OcurrenciaP{
+    display: none;
+}
+
+.info{
+    height: 99%;
+    width: 99%;
+    background-color: #474554;
+    border-radius: 9px;
+    color: white;	
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+}
+
+#header h1 { 
+    display:inline;
+    margin-right: 5%;
+}
+#header{
+    margin-left: 10%;
+    text-align: center;
+    display: none;
+}
+#clases{
+    color: rgba(255, 99, 132, 0.2);
+}
+#abstractas{
+    color: rgba(54, 162, 235, 0.2);
+}
+#interfaces{
+    color: rgba(255, 206, 86, 0.2);
+}
+#atributos{
+    color: rgba(75, 192, 192, 0.2);
+}
+#funciones{
+    color: rgba(153, 102, 255, 0.2);
+}
+#tabla,td,th{
+    text-align: center;
+    width: 500px;
+    height: 20px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 10px;
+    font-size: 16px;
+}
